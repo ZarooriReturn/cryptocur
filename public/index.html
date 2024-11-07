@@ -19,28 +19,31 @@
                 currency: "USD", // You can change this to your desired currency (USD, EUR, etc.)
             };
 
-            // Make a POST request to the Vercel API endpoint to initiate the payment
-            fetch('https://cryptocur-ynra.vercel.app/api/cryptopayment', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(paymentData),
-            })
-            .then(response => response.json())  // Parse the response as JSON
-            .then(data => {
-                if (data.paymentUrl) {
-                    // Redirect the user to the Coinbase Commerce payment page
-                    window.location.href = data.paymentUrl;
-                } else {
-                    alert('Payment creation failed!');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error initiating payment!');
-            });
-        }
+            fetch('https://your-vercel-project.vercel.app/api/cryptopayment', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(paymentData),
+})
+  .then(response => {
+    // Check if the response is JSON
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} - ${response.statusText}`);
+    }
+    
+    // Try to parse the response as JSON
+    return response.json();
+  })
+  .then(data => {
+    console.log('Payment initiated:', data);
+    window.location.href = data.paymentUrl;  // Redirect to payment page
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('There was an error initiating the payment. Please try again later.');
+  });
+
     </script>
 
 </body>
