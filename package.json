@@ -1,0 +1,13 @@
+{
+    "name": "cryptopayment-project",
+    "version": "1.0.0",
+    "description": "Cryptocurrency payment integration",
+    "main": "index.js",
+    "scripts": {
+      "start": "vercel dev"
+    },
+    "dependencies": {
+      "coinbase-commerce-node": "^2.0.0"
+    }
+  }
+  

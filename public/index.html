@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptocurrency Payment</title>
+</head>
+<body>
+
+    <h1>Pay with Cryptocurrency</h1>
+    <button onclick="initiatePayment()">Pay Now</button>
+
+    <script>
+        function initiatePayment() {
+            // Create the payment data (amount, product, and currency)
+            const paymentData = {
+                amount: 10.00,  // Amount in USD or other currency
+                product: "Your Product Name",
+                currency: "USD", // You can change this to your desired currency (USD, EUR, etc.)
+            };
+
+            // Make a POST request to the Vercel API endpoint to initiate the payment
+            fetch('https://your-vercel-api-url/api/cryptopayment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(paymentData),
+            })
+            .then(response => response.json())  // Parse the response as JSON
+            .then(data => {
+                if (data.paymentUrl) {
+                    // Redirect the user to the Coinbase Commerce payment page
+                    window.location.href = data.paymentUrl;
+                } else {
+                    alert('Payment creation failed!');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error initiating payment!');
+            });
+        }
+    </script>
+
+</body>
+</html>
