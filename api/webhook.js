@@ -4,7 +4,7 @@ import { Client } from 'coinbase-commerce-node';
 import { Charge } from 'coinbase-commerce-node/resources';
 
 // Coinbase Commerce webhook secret key
-const webhookSecret = 'your-webhook-signature-secret';  // Replace with your actual secret key
+const webhookSecret = 'e2019f0c-011a-42ae-8f5c-8496bb07290a';  // Replace with your actual secret key
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
